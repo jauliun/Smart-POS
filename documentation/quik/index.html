@@ -201,7 +201,7 @@
 <li>本 SDK 已使用 mavenCentral 托管，配置如下</li>
 </ul>
 <pre><code class="language-gradle">gradle:
-    implementation 'com.cardinfolink.smart.pos:PosSDK:2.6.3'
+    implementation 'com.cardinfolink.smart.pos:PosSDK:2.7.6'
 </code></pre>
 <ul>
 <li>如果想使用讯联集成的结算UI和逻辑，请配置</li>
@@ -210,7 +210,7 @@
     implementation 'com.cardinfolink.smart.pos:SDK-ZaiHui:1.1.1'
 </code></pre>
 <h2 id="pos">初始化（连接POS机硬件）</h2>
-<p>使用 N900 智能 POS 机器, 首先需要连接 POS 机硬件, 使用 SDK 提供的 <code>connect</code> 方法连接。
+<p>使用 N900 智能 POS 机器， 首先需要连接 POS 机硬件， 使用 SDK 提供的 <code>connect</code> 方法连接。
 建议在 <code>Application</code> 的 <code>onCreate</code> 方法中进行连接。</p>
 <pre><code>    @Override
     public void onCreate() {
@@ -235,7 +235,7 @@
 建议先调用<a href="#load_merInfo">根据激活码获取商户信息接口:</a>（返回商户名商户号终端号等信息），确认信息无误后，在调用激活码激活接口激活。  </p>
 <p><img alt="" src="../../img/newloginprocess.png" /> </p>
 <blockquote>
-<p>注意:一台终端能且仅能成功激活一次,无法重复进行激活操作。若有多次激活的需求(如debug阶段),请联系讯联客服。</p>
+<p>注意:一台终端能且仅能成功激活一次，无法重复进行激活操作。若有多次激活的需求(如debug阶段)，请联系讯联客服。</p>
 </blockquote>
 <pre><code>    //authCode 激活码（建议用扫码的方式得到激活码，避免让用户手输）
     CILSDK.activeWithCode(authCode, new Callback&lt;CILResponse&gt;() {
@@ -257,10 +257,10 @@
 <ul>
 <li>b、旧激活流程</li>
 </ul>
-<p>第一次使用智能 POS 终端的时候,需要使用讯联下发的商户号（merCode） 和终端号（termCode）激活  </p>
+<p>第一次使用智能 POS 终端的时候，需要使用讯联下发的商户号（merCode） 和终端号（termCode）激活  </p>
 <p><img alt="" src="../../img/activeprocess.png" /> </p>
 <blockquote>
-<p>注意:一台终端能且仅能成功激活一次,无法重复进行激活操作。若有多次激活的需求(如debug阶段),请联系讯联客服。推荐APP本身能够保持设备是否已经激活标志</p>
+<p>注意:一台终端能且仅能成功激活一次，无法重复进行激活操作。若有多次激活的需求(如debug阶段)，请联系讯联客服。推荐APP本身能够保持设备是否已经激活标志</p>
 </blockquote>
 <pre><code>    //merCode  讯联下发的商户号
     //termCode 讯联下发的终端号
@@ -300,10 +300,10 @@
 
 </code></pre>
 <p><strong>2、终端参数下载</strong></p>
-<p>激活成功之后,你的应用还需要下载一些交易时使用的参数,比如<code>交易地址和端口</code>、<code>交易超时时间</code>、<code>终端支持的功能</code>、<code>TPDU</code> 等,
-在你拿到 POS 终端之前,这些参数都会在讯联后台已经配置好,全部参数见 <code>CILResponse.Info</code> 返回值。下载成功之后 SKD 会
-以json字符串的形式保存这些参数到 <code>SharedPreference</code> (请不要擅自改动这些参数值,以免导致交易失败) 。当然,在 <code>onResult</code>
-中也会返回,你也可以自己选择性保存一些参数。另外, SDK 保存在 SharedPreference 里的值会提供接口 <code>CILSDK.getSystemParams()</code> 获取。</p>
+<p>激活成功之后，你的应用还需要下载一些交易时使用的参数，比如<code>交易地址和端口</code>、<code>交易超时时间</code>、<code>终端支持的功能</code>、<code>TPDU</code> 等，
+在你拿到 POS 终端之前，这些参数都会在讯联后台已经配置好，全部参数见 <code>CILResponse.Info</code> 返回值。下载成功之后 SKD 会
+以json字符串的形式保存这些参数到 <code>SharedPreference</code> (请不要擅自改动这些参数值，以免导致交易失败) 。当然，在 <code>onResult</code>
+中也会返回，你也可以自己选择性保存一些参数。另外， SDK 保存在 SharedPreference 里的值会提供接口 <code>CILSDK.getSystemParams()</code> 获取。</p>
 <blockquote>
 <p>注意：正常情况下，此方法只需执行成功一次，但是后台参数配置可能会有改动，APP本身需要调用预留功能调用此方法</p>
 </blockquote>
@@ -326,8 +326,8 @@
     });
 </code></pre>
 <p><strong>3、终端密钥下载</strong></p>
-<p>终端密钥下载只需要成功执行一次就可以,成功下载的密钥会被转载到POS硬件模块里面,后面就不需要再次调用了,建议你的应用可以在成功下载密钥之后持久化一个标志位,
-下次进入应用就不再去下载密钥了。整个过程可能会需要1~2分钟左右(依赖当前的网络状况),会经历以下步骤:</p>
+<p>终端密钥下载只需要成功执行一次就可以，成功下载的密钥会被转载到POS硬件模块里面，后面就不需要再次调用了，建议你的应用可以在成功下载密钥之后持久化一个标志位，
+下次进入应用就不再去下载密钥了。整个过程可能会需要1~2分钟左右(依赖当前的网络状况)，会经历以下步骤:</p>
 <blockquote>
 <p>请求讯联网关 RSA -&gt; 装载 RSA -&gt; 请求主密钥 -&gt; 装载主密钥 -&gt; 启用主密钥 -&gt; 请求工作密钥(签到) -&gt; 装载工作密钥 -&gt; 下载 AID -&gt; 装载 AID -&gt; 下载 IC 公钥 -&gt; 装载 IC 公钥。
 建议APP本身存储设备是否已经初始化方法标志。</p>
@@ -353,7 +353,7 @@
     });
 </code></pre>
 <h2 id="_2">签到</h2>
-<p>签到其实也就是更新工作密钥的一个过程 (<code>下载工作密钥+装载工作密钥</code> ),讯联网关平台要求应用需要每天签到一次。</p>
+<p>签到其实也就是更新工作密钥的一个过程 (<code>下载工作密钥+装载工作密钥</code> )，讯联网关平台要求应用需要每天签到一次。</p>
 <pre><code>    CILSDK.signIn(new Callback&lt;CILResponse&gt;() {
         @Override
         public void onResult(CILResponse cilResponse) {
@@ -367,7 +367,7 @@
     });
 </code></pre>
 <h2 id="_3">银行卡交易</h2>
-<p>由于银行卡交易逻辑有点复杂,讯联提供了一个 <code>BaseCardActivity</code> 基础类,你只需要继承这个类便可以做银行卡类的交易了。具体使用方法可以见 demo 
+<p>由于银行卡交易逻辑有点复杂，讯联提供了一个 <code>BaseCardActivity</code> 基础类，你只需要继承这个类便可以做银行卡类的交易了。具体使用方法可以见 demo 
 里的 <code>CommonCardHandlerActivity</code> 类。下面给个大概说明:</p>
 <pre><code class="language-java">    public class CommonCardHandlerActivity extends BaseCardActivity {
         @Override
@@ -599,7 +599,24 @@
 </code></pre>
 <p><strong>5、卡预授权</strong>  </p>
 <p>预授权接口<a href="#base_request">request必须包含参数:</a></p>
-<pre><code>
+<p>注意：预授权属于消费类型的交易，默认是做DCC的，在调用接口之前一定要将刷卡回调中的汇率信息设置给request，确保预授权的DCC交易能够顺利进行。</p>
+<pre><code>    //除了request必须包含的参数外，还需要以下参数
+    //复写的刷卡回调的方法中会返回汇率信息
+    if (rateInfo != null) {
+        request.setBillingAmt(rateInfo.getBillingAmt());//持卡人扣账金额
+        request.setBillingCurr(rateInfo.getBillingCurr());//持卡人扣账货币代码
+        request.setTransRate(rateInfo.getTransRate());//交易汇率
+        request.setBatchNum(rateInfo.getBatchNum());//汇率查询批次号
+        request.setTraceNum(rateInfo.getTraceNum());//汇率查询流水号
+    }
+
+    //地理位置信息，需要调用方自行获取传入sdk(非必填)
+    if (location != null) {
+        request.setLongitude(location.getLongitude());//经度
+        request.setLatitude(location.getLatitude());//纬度
+        request.setCoordinates(location.getCoordinates());//坐标系
+    }
+
     /**
      * 刷卡预授权
      *
@@ -643,26 +660,9 @@
 </code></pre>
 <p><strong>7、卡预授权完成</strong>  </p>
 <p>预授权完成接口<a href="#base_request">request必须包含参数:</a>  </p>
-<blockquote>
-<p>注意：预授权完成属于消费类型的交易，默认是做DCC的，在调用接口之前一定要将刷卡回调中的汇率信息设置给request，确保预授权完成的DCC交易能够顺利进行。</p>
-</blockquote>
-<pre><code>//除了request必须包含的参数外，还需要以下参数
-    //复写的刷卡回调的方法中会返回汇率信息
-    if (rateInfo != null) {
-            request.setBillingAmt(rateInfo.getBillingAmt());//持卡人扣账金额
-            request.setBillingCurr(rateInfo.getBillingCurr());//持卡人扣账货币代码
-            request.setTransRate(rateInfo.getTransRate());//交易汇率
-            request.setBatchNum(rateInfo.getBatchNum());//汇率查询批次号
-            request.setTraceNum(rateInfo.getTraceNum());//汇率查询流水号
-        }
-    //地理位置信息，需要调用方自行获取传入sdk
-            request.setLongitude(location.getLongitude());//经度
-            request.setLatitude(location.getLatitude());//纬度
-            request.setCoordinates(location.getCoordinates());//坐标系
-
-            request.setAmount(amount);//交易金额
-            request.setRevAuthCode(authCode);//原预授权交易授权码
-            request.setTransDatetime(originalTradeDate);//原预授权交易日期
+<pre><code>    request.setAmount(amount);//交易金额
+    request.setRevAuthCode(authCode);//原预授权交易授权码
+    request.setTransDatetime(originalTradeDate);//原预授权交易日期
     CILSDK.preAuthComplete(request, cardType, new Callback&lt;CILResponse&gt;() {
             @Override
             public void onResult(CILResponse cilResponse) {
@@ -673,7 +673,7 @@
             public void onError(Parcelable cilRequest, Exception e) {
                 ...
             }
-        });
+    });
 </code></pre>
 <p><strong>8、卡预授权完成撤销</strong>  </p>
 <p>预授权完成撤销接口<a href="#base_request">request必须包含参数:</a></p>
@@ -700,11 +700,11 @@
         });
 </code></pre>
 <p><strong>9、DCC转EDC</strong>  </p>
-<p>当交易卡片为外卡时，消费类（消费、预授权完成）交易可选择进行DCC转EDC。  </p>
+<p>当交易卡片为外卡时，消费类（消费、预授权）交易可选择进行DCC转EDC。  </p>
 <blockquote>
 <p>注意1：只有做了DCC的交易后才可能DCC转EDC成功，调用消费接口时如果持卡人的卡支持DCC，并且在刷卡页面复写的isOpenDcc方法中也返回true，sdk会优先执行DCC的逻辑，就是默认会走DCC的逻辑。  </p>
 <p>注意2：DCC转EDC无需刷卡，只需要使用消费成功的返回信息就可发起。  </p>
-<p>注意3：DCC转EDC成功后打印时，入参formatTransCode传PER,isForeignTrans传false</p>
+<p>注意3：DCC转EDC成功后打印时，入参formatTransCode传PER，isForeignTrans传false</p>
 </blockquote>
 <pre><code>    CILRequest request = new CILRequest();
     //以下参数取自原交易
@@ -731,30 +731,60 @@
     });
 
 </code></pre>
-<p><strong>10、预授权手输卡号</strong><br />
-    ```
-    //需要手输的卡信息有卡号和卡有效期两个字段</p>
-<pre><code>CILRequest request = new CILRequest();
- request.setAmount(amount);
- request.setCardNumb(cardInfo.getCardNumber());//卡号
- request.setCardExpirationDate(cardInfo.getCardExpirationDate());//卡片有效期
- request.setPosInputStyle("012");
+<p><strong>10、预授权手输卡号</strong>  </p>
+<blockquote>
+<p>注意1：这个地方一定要进行DCC汇率查询，预授权属于消费类接口，默认是做DCC的。  </p>
+<p>注意2：汇率查询一般sdk在刷卡的流程中自动完成，但是手输类的交易不走sdk的刷卡流程，需要调用方自行调用汇率查询api进行汇率查询，流程如下：
+   手输卡号和卡有效期--success--&gt;DCC汇率查询
+   DCC汇率查询--succ or fail--&gt;预授权</p>
+</blockquote>
+<pre><code>```
+//1.进行DCC汇率查询
+RateQueryListener listener = new RateQueryListener() {
+            @Override
+            public void onResult(boolean isSupport, RateInfo rateInfo) {
+                //发预授权完成交易
+            }
+        };
+sendQueryRate(cardInfo.getCardNumber(), listener);//调用父类BaseCardActivity
+
+//2.发预授权交易
+//需要手输的信息有卡号和卡有效期两个字段
+CILRequest request = new CILRequest();
+request.setCardNumb(cardInfo.getCardNumber());//卡号
+request.setCardExpirationDate(cardInfo.getCardExpirationDate());//卡片有效期
+request.setPosInputStyle("012");
+
+//2.1 汇率 
+if (rateInfo != null) {
+        request.setBillingAmt(rateInfo.getBillingAmt());
+        request.setBillingCurr(rateInfo.getBillingCurr());
+        request.setTransRate(rateInfo.getTransRate());
+        request.setBatchNum(rateInfo.getBatchNum());
+        request.setTraceNum(rateInfo.getTraceNum());
+    }
+//2.2 地理位置信息，需要调用者自己获取传入    
+if (location != null) {
+        request.setLongitude(location.getLongitude());
+        request.setLatitude(location.getLatitude());
+        request.setCoordinates(location.getCoordinates());
+    }
 
 CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
-        @Override
-        public void onResult(CILResponse cilResponse) {
-            ...
-        }
+    @Override
+    public void onResult(CILResponse cilResponse) {
+        ...
+    }
 
-        @Override
-        public void onError(Parcelable cilRequest, Exception e) {
-           ...
-        }
-    });
+    @Override
+    public void onError(Parcelable cilRequest, Exception e) {
+        ...
+    }
+});
 ```
 </code></pre>
 <p><strong>11、预授权撤销手输卡号</strong>  </p>
-<pre><code>    CILRequest request = new CILRequest();
+<pre><code>     CILRequest request = new CILRequest();
 
      //卡信息两个字段通过手输代替刷卡
      request.setCardNumb(cardInfo.getCardNumber());//卡号
@@ -780,48 +810,11 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
 
 </code></pre>
 <p><strong>12、预授权完成手输卡号</strong>   </p>
-<blockquote>
-<p>注意1：这个地方一定要进行DCC汇率查询，预授权完成属于消费类接口，默认是做Dcc的，同样如果需要做DCC转EDC,在预授权交易成功页面调用Dcc转EDC接口即可。  </p>
-<p>注意2：汇率查询一般sdk在刷卡的流程中自动完成，但是手输类的交易不走sdk的刷卡流程，需要调用方自行调用汇率查询api进行汇率查询，流程如下：</p>
-</blockquote>
-<pre><code>graph LR
-输入金额/原交易日期/授权码--&gt;手输卡号和卡有效期
-    手输卡号和卡有效期--success--&gt;DCC汇率查询
-        DCC汇率查询--succ or fail--&gt;预授权完成
-</code></pre>
-<pre><code>    //1.进行DCC汇率查询
-    RateQueryListener listener = new RateQueryListener() {
-                @Override
-                public void onResult(boolean isSupport, RateInfo rateInfo) {
-                    //发预授权完成交易
-                }
-            };
-    sendQueryRate(cardInfo.getCardNumber(), listener);//调用父类BaseCardActivity
-
-    //2.发预授权交易
-    CILRequest request = new CILRequest();
-     request.setCardNumb(cardInfo.getCardNumber());//卡号
-     request.setCardExpirationDate(cardInfo.getCardExpirationDate());//卡片有效期
-     request.setPosInputStyle(&quot;012&quot;);
-    //2.1 汇率 
-    if (rateInfo != null) {
-            request.setBillingAmt(rateInfo.getBillingAmt());
-            request.setBillingCurr(rateInfo.getBillingCurr());
-            request.setTransRate(rateInfo.getTransRate());
-            request.setBatchNum(rateInfo.getBatchNum());
-            request.setTraceNum(rateInfo.getTraceNum());
-        }
-    //2.2地理位置信息，需要调用者自己获取传入    
-    if (mLocationManager != null) {
-            request.setLongitude(location.getLongitude());
-            request.setLatitude(location.getLatitude());
-            request.setCoordinates(location.getCoordinates());
-        }
-
-            //以下信息可通过外界输入
-            request.setAmount(amount);
-            request.setTransDatetime(originalTradeDate);//原始交易日期
-            request.setRevAuthCode(authCode);//授权码
+<pre><code>    CILRequest request = new CILRequest();
+    //以下信息可通过外界输入
+    request.setAmount(amount);
+    request.setTransDatetime(originalTradeDate);//原始交易日期
+    request.setRevAuthCode(authCode);//授权码
 
     CILSDK.preAuthComplete(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
             @Override
@@ -838,18 +831,18 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
 <p><strong>13、预授权完成撤销手输卡号</strong>  </p>
 <pre><code>    CILRequest request = new CILRequest();
 
-     //卡信息两个字段通过手输代替刷卡
-     request.setCardNumb(cardInfo.getCardNumber());//卡号
-     request.setCardExpirationDate(cardInfo.getCardExpirationDate());//卡片有效期
-     request.setPosInputStyle(&quot;012&quot;);
+    //卡信息两个字段通过手输代替刷卡
+    request.setCardNumb(cardInfo.getCardNumber());//卡号
+    request.setCardExpirationDate(cardInfo.getCardExpirationDate());//卡片有效期
+    request.setPosInputStyle(&quot;012&quot;);
 
-     //下面三个字段可通过外界手输录入,也可通过本地数据库保存的交易信息查找
-     request.setAmount(amount);
-     request.setReferenceNumber(refnum);
-     request.setRevAuthCode(authcode;//授权码
-     request.setTraceNum(tracenum);
-     request.setBatchNum(batchnum);
-     request.setTransDatetime(originalTradeDate);//原始交易日期
+    //下面三个字段可通过外界手输录入，也可通过本地数据库保存的交易信息查找
+    request.setAmount(amount);
+    request.setReferenceNumber(refnum);
+    request.setRevAuthCode(authcode;//授权码
+    request.setTraceNum(tracenum);
+    request.setBatchNum(batchnum);
+    request.setTransDatetime(originalTradeDate);//原始交易日期
 
     CILSDK.revokePreAuthComplete(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
             @Override
@@ -914,7 +907,7 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
 <tr>
 <td>billingCurrNum</td>
 <td>String</td>
-<td>持卡人扣帐货币代码,三位数字</td>
+<td>持卡人扣帐货币代码，三位数字</td>
 <td>无</td>
 <td></td>
 </tr>
@@ -1187,7 +1180,7 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
 </tbody>
 </table>
 <h2 id="_4">扫码交易</h2>
-<p>扫码相关的交易则是不依赖 POS 机器的读卡模块的,但是你需要将<code>微信</code>或者<code>支付宝</code>的二维码读出来传给扫码消费接口,扫码可以使用第三方库,如 <code>zxing</code>。</p>
+<p>扫码相关的交易则是不依赖 POS 机器的读卡模块的，但是你需要将<code>微信</code>或者<code>支付宝</code>的二维码读出来传给扫码消费接口，扫码可以使用第三方库，如 <code>zxing</code>。</p>
 <p><strong>1、扫码消费</strong></p>
 <pre><code>    CILRequest request = new CILRequest();
     request.setAmount(amount);//交易金额
@@ -1213,7 +1206,7 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
     });  
 </code></pre>
 <blockquote>
-<p>注意,如果应答码返回09或98，需要调用讯联扫码查询接口，查询该笔订单的实际状态。</p>
+<p>注意，如果应答码返回09或98，需要调用讯联扫码查询接口，查询该笔订单的实际状态。</p>
 </blockquote>
 <p><strong>2、扫码撤销</strong>  </p>
 <pre><code>    CILRequest request = new CILRequest();
@@ -1275,7 +1268,7 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
             }
         });
 </code></pre>
-<p><strong>5、扫码消费查询,只查询一次，不含取消接口</strong>  </p>
+<p><strong>5、扫码消费查询，只查询一次，不含取消接口</strong>  </p>
 <pre><code>    CILRequest request = new CILRequest();
     request.setBatchNum(response.getTrans().getBatchNum());//批次号
     request.setTraceNum(response.getTrans().getTraceNum());//凭证号
@@ -1409,7 +1402,7 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
 <p><strong>11、单品券功能接入指引</strong>   </p>
 <blockquote>
 <p>注意：sdk v2.5.3及之后版本支持该功能
-1. 扫码消费接口增加单品券核销功能，扫码消费接口增加入参两个参数，订单优惠标记（为配券时候的填的优惠标记）,商品列表；</p>
+1. 扫码消费接口增加单品券核销功能，扫码消费接口增加入参两个参数，订单优惠标记（为配券时候的填的优惠标记），商品列表；</p>
 </blockquote>
 <pre><code>    /**
      * 扫码消费
@@ -1506,7 +1499,7 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
 ]&quot;
 </code></pre>
 <ul>
-<li>响应报文新增一个CouponInfo的实例,内部包含属性字段有：</li>
+<li>响应报文新增一个CouponInfo的实例，内部包含属性字段有：</li>
 </ul>
 <table>
 <thead>
@@ -1628,7 +1621,7 @@ CILSDK.preAuth(request, CardType.MSC_CARD, new Callback&lt;CILResponse&gt;() {
 </code></pre>
 <p>附：最多支持传入9个商品    </p>
 <h2 id="_5">账单查询</h2>
-<p>智能 POS SDK 分别提供了最多30天的<code>账单列表查询</code>和<code>账单统计接口</code>接口,接口会根据 type 值确定返回<code>银行卡账单</code>或<code>扫码账单</code>。
+<p>智能 POS SDK 分别提供了最多30天的<code>账单列表查询</code>和<code>账单统计接口</code>接口，接口会根据 type 值确定返回<code>银行卡账单</code>或<code>扫码账单</code>。
 交易成功还是失败最终以返回账单中应答码为准，见<a href="https://gongluis.github.io/Smart-POS/attached/sdkAnserCode/">应答码表</a> 。</p>
 <blockquote>
 <p>交互设计建议：交易中，具体来说，调用CILSDK.consumeQr()或是CILSDK.consume()方法时，当因为网络中断进入onError callback时，建议在交互中加入<code>查询账单列表</code>的逻辑，这样交易失败后可方便收银员通过账单来确认这笔订单的实际状态。</p>
@@ -1718,7 +1711,7 @@ CILSDK.getBillByBatchNumAsync(batchNum, callBackIsOnMainThread, new Callback&lt;
         public void onResult(final CILResponse response) {
             if (null != response &amp;&amp; 0 == response.getStatus()) {
                 //账单获取成功
-                Trans[] trans = response.getTxn(); //账单数据,字段详情见 Trans
+                Trans[] trans = response.getTxn(); //账单数据，字段详情见 Trans
             }
         }
 
@@ -1793,8 +1786,8 @@ CILSDK.getBillByBatchNumAsync(batchNum, callBackIsOnMainThread, new Callback&lt;
 
 </code></pre>
 <blockquote>
-<p>SDK 的网络部分使用的是第三方库 <code>okhttp</code>,以上账单接口分别还提供了相对应的同步接口 <code>getBills</code> 和 <code>getBillStat</code> 。
-对于异步接口来说,都会返回一个 <code>Call</code> 对象,你可以在应用出错的时候调用 <code>call.cancel()</code> 取消这次请求,以免造成内存泄露。  </p>
+<p>SDK 的网络部分使用的是第三方库 <code>okhttp</code>，以上账单接口分别还提供了相对应的同步接口 <code>getBills</code> 和 <code>getBillStat</code> 。
+对于异步接口来说，都会返回一个 <code>Call</code> 对象，你可以在应用出错的时候调用 <code>call.cancel()</code> 取消这次请求，以免造成内存泄露。  </p>
 </blockquote>
 <h2 id="_6">小费</h2>
 <blockquote>
@@ -1851,8 +1844,8 @@ CILSDK.getBillByBatchNumAsync(batchNum, callBackIsOnMainThread, new Callback&lt;
         });
 </code></pre>
 <h2 id="_7">结算</h2>
-<p>结算需求主要用于每日交易结束时或收银员交接班时,对某段时间内的账款核对。商户每日交易结束后,收银员需要统计并核对所有的交易,核对交易统计准确后结算，打印出结算单。
-结算会涉及到一个概念--<code>批次号</code>,我们在前面的交易都会传入一个批次号给 request ,调用结算之后,后续的交易需要将这个批次号加1,因为此批次已经打包结算掉了。</p>
+<p>结算需求主要用于每日交易结束时或收银员交接班时，对某段时间内的账款核对。商户每日交易结束后，收银员需要统计并核对所有的交易，核对交易统计准确后结算，打印出结算单。
+结算会涉及到一个概念--<code>批次号</code>，我们在前面的交易都会传入一个批次号给 request ，调用结算之后，后续的交易需要将这个批次号加1，因为此批次已经打包结算掉了。</p>
 <pre><code>    //batchNum 批次号
     CILSDK.transSettleAsync(batchNum, new Callback&lt;CILResponse&gt;() {
         @Override
@@ -1868,7 +1861,7 @@ CILSDK.getBillByBatchNumAsync(batchNum, callBackIsOnMainThread, new Callback&lt;
 </code></pre>
 <p>如果使用讯联样式结算UI、逻辑直接使用</p>
 <blockquote>
-<p>注意,使用SettleDaoUtil工具类是必须先初始化，SettleDaoUtil.getInstance().init();</p>
+<p>注意，使用SettleDaoUtil工具类是必须先初始化，SettleDaoUtil.getInstance().init();</p>
 </blockquote>
 <pre><code>
     SettleDaoUtil.getInstance().gotoLiquidation(context)
@@ -2031,7 +2024,7 @@ CILSDK.getBillByBatchNumAsync(batchNum, callBackIsOnMainThread, new Callback&lt;
     });
 </code></pre>
 <h2 id="_9">其他设置</h2>
-<p>考虑到使用 SDK 的时候可能还会有其他需求,比如<code>获取 POS 机的 SN 号</code>、<code>设置密钥索引</code>等,在这里,我们也提供了一部分接口。</p>
+<p>考虑到使用 SDK 的时候可能还会有其他需求，比如<code>获取 POS 机的 SN 号</code>、<code>设置密钥索引</code>等，在这里，我们也提供了一部分接口。</p>
 <ul>
 <li>获取 SDK 版本</li>
 </ul>

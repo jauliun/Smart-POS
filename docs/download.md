@@ -1,9 +1,7 @@
-### **Sample Download**  
+## **Sample Download**  
 最新版接入demo下载：  
 [demo下载](http://hd2-prod-smartpos.oss-cn-shanghai.aliyuncs.com/apkMgt/2020-01-07/pos-demo.zip)
 
-
-> 注意：v2.1.3以及后续sdk版本使用Jcenter管理（`最新版本:2.5.2`）
 
 ```gradle
 compile 'com.cardinfolink.smart.pos:PosSDK:"latestVersion"'
@@ -19,10 +17,12 @@ or
 </dependency>
 ```
 
-### **版本说明(Change Log)**  
+## **版本说明(Change Log)**  
 
 | 版本 | 更新内容 |
 |:--|:--|
+| V2.7.6 | 1. 预授权、预授权完成DCC交易调整； |
+| V2.6.3 |1. DCC or EDC 币种选择；
 | V2.5.2 |1. 扫码接口新增单品券功能； 2. 修改交易查询接口逻辑|
 | V2.4.2 |1. 新增扫码预授权|
 | V2.4.1 |1. 卡交易增加上送地理位置；2. 增加脱机pin交易；3. 修改DCC交易逻辑|
@@ -38,7 +38,4 @@ or
 | V1.0.2 |1. 增加 `setTestAddr` 和 `setProAddr` 方法。可以方便更改测试环境和正式环境地址|
 | V1.0.1 |1. 增加外部订单号|
 | V1.0.0 |1. 第一版讯联 POS SDK , 支持银行卡( IC 卡、磁条卡、非接卡)和扫码(支付宝、微信)交易|
-
-
-
 
